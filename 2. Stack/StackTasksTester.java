@@ -5,20 +5,66 @@ public class StackTasksTester {
     public static int diamondCount(Stack stack, String str) {
         // To Do
         // As the stack is storing int type data in the stack and you are checking a String. Consider '>' = 1, '<' = 2 and '.' = 3 for mapping String with integer.
-        return -1; // Delete this line
+        int count = 0;
+        int oneCounter = 0;
+        for (int i = 0; i < str.length(); i++) {
+            if(str.charAt(i) == '<') {
+                stack.push(2);
+            }
+            if(str.charAt(i) == '>') {
+                oneCounter++;
+            }
+        }
+        for(int i = 0; i < oneCounter; i++) {
+            if(stack.isEmpty()) {
+                break;
+            }
+            else {
+                if(stack.pop()+1 == 3){
+                    count++;
+                }
+            }
+        }
+        return count; // Delete this line
     }
 
     // Task 5
     // You have to write this method
     public static void removeBlock(Stack stack, int n) {
         // To Do
+        Stack temp = new Stack();
+        for (int i = 0; i < n-1; i++) {
+            temp.push(stack.pop());
+        }
+        stack.pop();
+        while(!temp.isEmpty()) {
+            stack.push(temp.pop());
+        }
     }
 
     // Task 6
     // You have to write this method
     public static Stack conditionalReverse(Stack stack) {
         // To Do
-        return null; //remove this line once your're done
+        Stack temp = new Stack();
+        temp.push(stack.pop());
+        int popped_elem=0;
+        while(!stack.isEmpty()){
+            if(popped_elem!=temp.peek()){
+                temp.push(stack.pop());
+                popped_elem = stack.peek();
+            }
+            else{
+                stack.pop();
+                if(stack.peek()!=null){
+                    popped_elem = stack.peek();
+                }
+                else{
+                    break;
+                }
+            }
+        }
+        return temp; //remove this line once your're done
     }
 
     //DO NOT CHANGE THIS METHOD
